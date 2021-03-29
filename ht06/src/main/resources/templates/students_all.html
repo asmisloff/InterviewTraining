@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All students</title>
+</head>
+<body>
+    <h1>All Students</h1>
+
+    <table>
+        <tr>
+            <th> id </th>
+            <th> name </th>
+            <th> mark </th>
+        </tr>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.id}" />
+            <td th:text="${student.name}" />
+            <td th:text="${student.mark}" />
+            <td> <a th:href="@{'delete/' + ${student.id}}"> delete </a> </td>
+            <td> <a th:href="@{'edit/' + ${student.id}}"> edit </a> </td>
+        </tr>
+    </table>
+
+    <form method="post" th:action="@{add}" th:object="${new_student}">
+        <input type="text" th:field="*{name}">
+        <input type="number" th:field="*{mark}">
+        <button type="submit"> Add new </button>
+    </form>
+
+</body>
+</html>
